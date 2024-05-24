@@ -1,0 +1,525 @@
+/* 
+        docker image:        ghcr.io/akafeng/sing-box    latest
+        config path:         /etc/sing-box/config.json
+        run command:         sing-box -C /etc/sing-box/ run 
+*/
+{
+    "log": {
+        "disabled": false,
+        "level": "fatal",
+        "timestamp": true
+    },
+    "experimental": {
+        "clash_api": {
+            "external_controller": "0.0.0.0:9090",
+            "external_ui": "yacd",
+            "external_ui_download_url": "https:\/\/github.com\/MetaCubeX\/Yacd-meta\/archive\/gh-pages.zip",
+            "external_ui_download_detour": "direct",
+            "secret": "",
+            "default_mode": "rule"
+        }
+    },
+    "dns": {
+        "servers": [
+            {
+                "address": "tcp:\/\/94.140.14.140",
+                "address_resolver": "dns-direct",
+                "strategy": "ipv4_only",
+                "tag": "dns-remote"
+            },
+            {
+                "address": "tcp:\/\/94.140.14.140",
+                "address_resolver": "dns-local",
+                "detour": "direct",
+                "strategy": "ipv4_only",
+                "tag": "dns-direct"
+            },
+            {
+                "address": "local",
+                "detour": "direct",
+                "tag": "dns-local"
+            },
+            {
+                "address": "rcode:\/\/success",
+                "tag": "dns-block"
+            }
+        ],
+        "rules": [
+            {
+                "domain_suffix": [
+                    ".ir"
+                ],
+                "server": "dns-direct"
+            },
+            {
+                "outbound": "direct",
+                "server": "dns-direct",
+                "rewrite_ttl": 20
+            },
+            {
+                "outbound": "any",
+                "server": "dns-direct",
+                "rewrite_ttl": 20
+            }
+        ],
+        "reverse_mapping": true,
+        "strategy": "ipv4_only",
+        "independent_cache": true
+    },
+    "inbounds": [
+        {
+            "type": "vmess",
+            "listen": "0.0.0.0",
+            "listen_port": 80,
+            "udp_fragment": true,
+            "tcp_fast_open": true,
+            "users": [
+                {
+                    "uuid": "91d923b7-18bb-5d06-a67a-be2bc461cb2a"
+                }
+            ],
+            "transport": {
+                "type": "ws",
+                "path": ""
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "tag": "نیکاشاکرمی",
+            "type": "selector",
+            "default": "AutoTest",
+            "outbounds": [
+                "AutoTest",
+                "🇨🇦 T.ME/wearestand",
+                "🇬🇧 T.ME/iranramona",
+                "🇬🇪 T.ME/wearestand",
+                "🇬🇱 T.ME/iranramona",
+                "🇭🇳 T.ME/wearestand",
+                "🇸🇪 T.ME/iranramona",
+                "🇩🇪 T.ME/wearestand",
+                "🇺🇸 T.ME/iranramona",
+                "🇦🇿 T.ME/wearestand",
+                "🇦🇲 T.ME/iranramona"
+            ]
+        },
+        {
+            "tag": "AutoTest",
+            "type": "urltest",
+            "outbounds": [
+                "🇨🇦CANADA",
+                "🇬🇧UNITED KINGDOM",
+                "🇬🇪GEORGIA",
+                "🇬🇱GREENLAND",
+                "🇭🇳HONDURAS",
+                "🇸🇪SWEDEN",
+                "🇩🇪GERMANY",
+                "🇺🇸UNITED USTATES",
+                "🇦🇿AZERBAIJAN",
+                "🇦🇲ARMENIA"
+            ]
+        },
+        {
+            "tag": "🇨🇦 T.ME/wearestand",
+            "type": "urltest",
+            "outbounds": [
+                "🇨🇦CANADA"
+            ]
+        },
+        {
+            "tag": "🇬🇧 T.ME/iranramona",
+            "type": "urltest",
+            "outbounds": [
+                "🇬🇧UNITED KINGDOM"
+            ]
+        },
+        {
+            "tag": "🇬🇪 T.ME/wearestand",
+            "type": "urltest",
+            "outbounds": [
+                "🇬🇪GEORGIA"
+            ]
+        },
+        {
+            "tag": "🇬🇱 T.ME/iranramona",
+            "type": "urltest",
+            "outbounds": [
+                "🇬🇱GREENLAND"
+            ]
+        },
+        {
+            "tag": "🇭🇳 T.ME/wearestand",
+            "type": "urltest",
+            "outbounds": [
+                "🇭🇳HONDURAS"
+            ]
+        },
+        {
+            "tag": "🇸🇪 T.ME/iranramona",
+            "type": "urltest",
+            "outbounds": [
+                "🇸🇪SWEDEN"
+            ]
+        },
+        {
+            "tag": "🇩🇪 T.ME/wearestand",
+            "type": "urltest",
+            "outbounds": [
+                "🇩🇪GERMANY"
+            ]
+        },
+        {
+            "tag": "🇺🇸 T.ME/iranramona",
+            "type": "urltest",
+            "outbounds": [
+                "🇺🇸UNITED USTATES"
+            ]
+        },
+        {
+            "tag": "🇦🇿 T.ME/wearestand",
+            "type": "urltest",
+            "outbounds": [
+                "🇦🇿AZERBAIJAN"
+            ]
+        },
+        {
+            "tag": "🇦🇲 T.ME/iranramona",
+            "type": "urltest",
+            "outbounds": [
+                "🇦🇲ARMENIA"
+            ]
+        },
+        {
+            "tag": "direct",
+            "type": "direct"
+        },
+        {
+            "tag": "block",
+            "type": "block"
+        },
+        {
+            "tag": "dns-out",
+            "type": "dns"
+        },
+        {
+            "headers": {
+                "Host": [
+                    "marilynmanson.link"
+                ]
+            },
+            "password": "ZpqEPnaKr3TQgJut3vg9WK96",
+            "path": "",
+            "server": "66.111.61.161",
+            "server_port": 90,
+            "domain_strategy": "",
+            "tag": "🇨🇦CANADA",
+            "tls": {
+                "alpn": [
+                    "h2,http/1.1"
+                ],
+                "disable_sni": false,
+                "enabled": true,
+                "insecure": true,
+                "server_name": "gitlab.com"
+            },
+            "type": "http",
+            "username": "G9VaAtYjVh2hskLFeBEqicoe"
+        },
+        {
+            "headers": {
+                "Host": [
+                    "marilynmanson.link"
+                ]
+            },
+            "password": "ZpqEPnaKr3TQgJut3vg9WK96",
+            "path": "",
+            "server": "194.35.233.12",
+            "server_port": 90,
+            "domain_strategy": "",
+            "tag": "🇬🇧UNITED KINGDOM",
+            "tls": {
+                "alpn": [
+                    "h2,http/1.1"
+                ],
+                "disable_sni": false,
+                "enabled": true,
+                "insecure": true,
+                "server_name": "gitlab.com"
+            },
+            "type": "http",
+            "username": "G9VaAtYjVh2hskLFeBEqicoe"
+        },
+        {
+            "headers": {
+                "Host": [
+                    "marilynmanson.link"
+                ]
+            },
+            "password": "Y2hVxnm2AcwP9P7vrZnbdAMT",
+            "path": "",
+            "server": "81.17.123.100",
+            "server_port": 90,
+            "domain_strategy": "",
+            "tag": "🇬🇪GEORGIA",
+            "tls": {
+                "alpn": [
+                    "h2,http/1.1"
+                ],
+                "disable_sni": false,
+                "enabled": true,
+                "insecure": true,
+                "server_name": "gitlab.com"
+            },
+            "type": "http",
+            "username": "yLoEDZiuRqdg8HqQfaEMXhzn"
+        },
+        {
+            "headers": {
+                "Host": [
+                    "marilynmanson.link"
+                ]
+            },
+            "password": "ZpqEPnaKr3TQgJut3vg9WK96",
+            "path": "",
+            "server": "176.53.177.1",
+            "server_port": 90,
+            "domain_strategy": "",
+            "tag": "🇬🇱GREENLAND",
+            "tls": {
+                "alpn": [
+                    "h2,http/1.1"
+                ],
+                "disable_sni": false,
+                "enabled": true,
+                "insecure": true,
+                "server_name": "gitlab.com"
+            },
+            "type": "http",
+            "username": "G9VaAtYjVh2hskLFeBEqicoe"
+        },
+        {
+            "headers": {
+                "Host": [
+                    "marilynmanson.link"
+                ]
+            },
+            "password": "ZpqEPnaKr3TQgJut3vg9WK96",
+            "path": "",
+            "server": "193.9.32.3",
+            "server_port": 90,
+            "domain_strategy": "",
+            "tag": "🇭🇳HONDURAS",
+            "tls": {
+                "alpn": [
+                    "h2,http/1.1"
+                ],
+                "disable_sni": false,
+                "enabled": true,
+                "insecure": true,
+                "server_name": "gitlab.com"
+            },
+            "type": "http",
+            "username": "G9VaAtYjVh2hskLFeBEqicoe"
+        },
+        {
+            "headers": {
+                "Host": [
+                    "marilynmanson.link"
+                ]
+            },
+            "password": "Y2hVxnm2AcwP9P7vrZnbdAMT",
+            "path": "",
+            "server": "185.219.140.49",
+            "server_port": 90,
+            "domain_strategy": "",
+            "tag": "🇸🇪SWEDEN",
+            "tls": {
+                "alpn": [
+                    "h2,http/1.1"
+                ],
+                "disable_sni": false,
+                "enabled": true,
+                "insecure": true,
+                "server_name": "gitlab.com"
+            },
+            "type": "http",
+            "username": "yLoEDZiuRqdg8HqQfaEMXhzn"
+        },
+        {
+            "headers": {
+                "Host": [
+                    "marilynmanson.link"
+                ]
+            },
+            "password": "Y2hVxnm2AcwP9P7vrZnbdAMT",
+            "path": "",
+            "server": "194.233.96.24",
+            "server_port": 90,
+            "domain_strategy": "",
+            "tag": "🇩🇪GERMANY",
+            "tls": {
+                "alpn": [
+                    "h2,http/1.1"
+                ],
+                "disable_sni": false,
+                "enabled": true,
+                "insecure": true,
+                "server_name": "gitlab.com"
+            },
+            "type": "http",
+            "username": "yLoEDZiuRqdg8HqQfaEMXhzn"
+        },
+        {
+            "headers": {
+                "Host": [
+                    "marilynmanson.link"
+                ]
+            },
+            "password": "Y2hVxnm2AcwP9P7vrZnbdAMT",
+            "path": "",
+            "server": "62.182.99.254",
+            "server_port": 90,
+            "domain_strategy": "",
+            "tag": "🇺🇸UNITED USTATES",
+            "tls": {
+                "alpn": [
+                    "h2,http/1.1"
+                ],
+                "disable_sni": false,
+                "enabled": true,
+                "insecure": true,
+                "server_name": "gitlab.com"
+            },
+            "type": "http",
+            "username": "yLoEDZiuRqdg8HqQfaEMXhzn"
+        },
+        {
+            "headers": {
+                "Host": [
+                    "marilynmanson.link"
+                ]
+            },
+            "password": "Y2hVxnm2AcwP9P7vrZnbdAMT",
+            "path": "",
+            "server": "45.137.79.1",
+            "server_port": 90,
+            "domain_strategy": "",
+            "tag": "🇦🇿AZERBAIJAN",
+            "tls": {
+                "alpn": [
+                    "h2,http/1.1"
+                ],
+                "disable_sni": false,
+                "enabled": true,
+                "insecure": true,
+                "server_name": "gitlab.com"
+            },
+            "type": "http",
+            "username": "yLoEDZiuRqdg8HqQfaEMXhzn"
+        },
+        {
+            "headers": {
+                "Host": [
+                    "marilynmanson.link"
+                ]
+            },
+            "password": "Y2hVxnm2AcwP9P7vrZnbdAMT",
+            "path": "",
+            "server": "45.137.78.1",
+            "server_port": 90,
+            "domain_strategy": "",
+            "tag": "🇦🇲ARMENIA",
+            "tls": {
+                "alpn": [
+                    "h2,http/1.1"
+                ],
+                "disable_sni": false,
+                "enabled": true,
+                "insecure": true,
+                "server_name": "gitlab.com"
+            },
+            "type": "http",
+            "username": "yLoEDZiuRqdg8HqQfaEMXhzn"
+        }
+    ],
+    "route": {
+        "auto_detect_interface": true,
+        "override_android_vpn": true,
+        "final": "نیکاشاکرمی",
+        "geoip": {
+            "download_url": "https:\/\/github.com\/chocolate4u\/Iran-sing-box-rules\/releases\/latest\/download\/geoip.db",
+            "download_detour": "direct"
+        },
+        "geosite": {
+            "download_url": "https:\/\/github.com\/chocolate4u\/Iran-sing-box-rules\/releases\/latest\/download\/geosite.db",
+            "download_detour": "direct"
+        },
+        "rules": [
+            {
+                "outbound": "dns-out",
+                "port": [
+                    53
+                ]
+            },
+            {
+                "inbound": [
+                    "dns-in"
+                ],
+                "outbound": "dns-out"
+            },
+            {
+                "domain_suffix": [
+                    "ir"
+                ],
+                "outbound": "direct"
+            },
+            {
+                "geoip": [
+                    "ir",
+                    "private",
+                    "arvancloud"
+                ],
+                "outbound": "direct"
+            },
+            {
+                "geosite": [
+                    "ir"
+                ],
+                "outbound": "direct"
+            },
+            {
+                "geosite": [
+                    "geosite:category-ads-all",
+                    "malware",
+                    "phishing",
+                    "cryptominers"
+                ],
+                "outbound": "block"
+            },
+            {
+                "geosite": [
+                    "other"
+                ],
+                "outbound": "direct"
+            },
+            {
+                "geoip": [
+                    "malware",
+                    "phishing"
+                ],
+                "outbound": "block"
+            },
+            {
+                "ip_cidr": [
+                    "224.0.0.0\/3",
+                    "ff00::\/8"
+                ],
+                "outbound": "block",
+                "source_ip_cidr": [
+                    "224.0.0.0\/3",
+                    "ff00::\/8"
+                ]
+            }
+        ]
+    }
+}
