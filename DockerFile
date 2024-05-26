@@ -1,13 +1,13 @@
 FROM debian:bookworm-slim AS builder
 
-ARG SING_BOX_VERSION="1.8.14"
+ARG SING_BOX_VERSION="1.8.11"
 ARG SING_BOX_URL="https://github.com/SagerNet/sing-box/releases/download/v${SING_BOX_VERSION}/"
 
 RUN set -eux \
     && apt-get update -qyy \
     && apt-get install -qyy --no-install-recommends --no-install-suggests \
     ca-certificates \
-    wget \
+    curl \
     && rm -rf /var/lib/apt/lists/* /var/log/* \
     \
     && ARCH=`uname -m` \
@@ -20,11 +20,10 @@ RUN set -eux \
     ;; \
     esac \
     \
-    && wget -O sing-box.tar.gz "${SING_BOX_URL}${SING_BOX_FILENAME}" \
+    && curl -fsSL "${SING_BOX_URL}${SING_BOX_FILENAME}" -o sing-box.tar.gz \
     && tar -xzvf sing-box.tar.gz \
     && mv sing-box*/sing-box /usr/local/bin/sing-box \
-    && rm -rf sing-box* 
-
+    && rm -rf sing-box*
 
 ######
 
@@ -36,7 +35,8 @@ RUN set -eux \
     && apt-get update -qyy \
     && apt-get install -qyy --no-install-recommends --no-install-suggests \
     ca-certificates curl \
-    &&  curl   "https://raw.githubusercontent.com/J-Saeedi/iran_profile_for_internet/main/01.json" -o /tmp/01.json -s  \
-    && rm -rf /var/lib/apt/lists/* /var/log/* 
-
-ENTRYPOINT ["/usr/local/bin/sing-box", "run", "-c", "/tmp/01.json"]
+    && rm -rf /var/lib/apt/lists/* /var/log/*
+ADD https://github.com/malikshi/sing-box-geo/releases/latest/download/geoip.db geoip.db
+ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
+ADD https://github.com/J-Saeedi/iran_profile_for_internet/raw/main/01.json /tmp/01.json
+ENTRYPOINT ["/usr/local/bin/sing-box", "run", "-C", "/tmp"]
