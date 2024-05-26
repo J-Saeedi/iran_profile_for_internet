@@ -10,7 +10,7 @@ jobs:
       - name: config docker and push
         run : |
           docker login --username J-Saeedi --password ${{secrets.GH_PAT}} ghcr.io
-          docker build . --tag ghcr.io/J-Saeedi/iran_profile_for_internet:latest
-          docker push ghcr.io/J-Saeedi/iran_profile_for_internet:latest
+          docker build . --tag ghcr.io/j-saeedi/iran_profile_for_internet:latest
+          docker push ghcr.io/j-saeedi/iran_profile_for_internet:latest
           
     
