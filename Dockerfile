@@ -36,8 +36,11 @@ RUN set -eux \
     && apt-get install -qyy --no-install-recommends --no-install-suggests \
     ca-certificates curl \
     && rm -rf /var/lib/apt/lists/* /var/log/*
-ADD https://github.com/malikshi/sing-box-geo/releases/latest/download/geoip.db geoip.db
-ADD https://github.com/chocolate4u/Iran-sing-box-rules/releases/latest/download/geosite.db geosite.db
-ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
-ADD https://github.com/J-Saeedi/iran_profile_for_internet/raw/main/01.json /tmp/01.json
+# ADD https://github.com/malikshi/sing-box-geo/releases/latest/download/geoip.db geoip.db
+# ADD https://github.com/chocolate4u/Iran-sing-box-rules/releases/latest/download/geosite.db geosite.db
+#ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
+#ADD https://github.com/J-Saeedi/iran_profile_for_internet/raw/main/01.json /tmp/01.json
+COPY geoip.db /geoip.db
+COPY geosite.db /geosite.db
+COPY 01.json /tmp/01.json
 ENTRYPOINT ["/usr/local/bin/sing-box", "run", "-C", "/tmp"]
